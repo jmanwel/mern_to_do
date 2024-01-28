@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Preloader from "./components/Preloader.jsx";
-import { readTodos, createTodo } from "./functions";
+import { readTodos, createTodo, updateTodo } from "./functions";
 
 function App() {
   
@@ -24,10 +24,9 @@ function App() {
       setTodos(result);
     } 
     fetchData();
-  }, [])
+  }, [currentId])
 
   const clear = ()=>{
-    console.log("esc")
     setCurrentId(0);
     setTodo({title:"", content:""})
   }
@@ -44,8 +43,12 @@ function App() {
 
   const onSubmitHandler = async (e)=>{
     e.preventDefault();
-    const result = await createTodo(todo);
-    setTodos([...todos, result]);
+    if (currentId === 0){
+      const result = await createTodo(todo);
+      setTodos([...todos, result]);
+    } else {
+      await updateTodo(currentId, todo);
+    }
     clear();
   }
 

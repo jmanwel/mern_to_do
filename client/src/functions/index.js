@@ -16,3 +16,11 @@ export const createTodo = async (todo)=>{
     }
     catch(e) {console.log(e)};
 }
+
+export const updateTodo = async (id, todo)=>{
+    try{
+        const {data} = await api.updateTodo(id, todo);
+        return data;
+    }
+    catch(e) {console.log(e)};
+}
