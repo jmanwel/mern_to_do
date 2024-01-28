@@ -15,7 +15,7 @@ function App() {
       : 
       {title:"", content: ""}
       setTodo(currentTodo);
-  }, [])
+  }, [currentId])
 
 
   useEffect(() => {
@@ -27,14 +27,14 @@ function App() {
   }, [])
 
   const clear = ()=>{
+    console.log("esc")
     setCurrentId(0);
     setTodo({title:"", content:""})
   }
 
   useEffect(()=>{
     const clearField = (e) =>{
-      if (e.keycode === 27){
-        console.log("esc")
+      if (e.key === "Escape"){
         clear();
       }
     }
@@ -46,6 +46,7 @@ function App() {
     e.preventDefault();
     const result = await createTodo(todo);
     setTodos([...todos, result]);
+    clear();
   }
 
   return (
