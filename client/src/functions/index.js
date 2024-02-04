@@ -24,3 +24,10 @@ export const updateTodo = async (id, todo)=>{
     }
     catch(e) {console.log(e)};
 }
+
+export const deleteTodo = async (id)=>{
+    try{
+        await api.deleteTodo(id);
+    }
+    catch(e) {console.log(e)};
+}
